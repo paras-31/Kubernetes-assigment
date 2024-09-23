@@ -97,6 +97,9 @@ The cleanup logic is implemented in `cleanup.py`, which is mounted into the `pod
 ## Troubleshooting
 
 - **Error: Forbidden when deleting pods**:
+
+Author
+Paras Kamboj
   This error may occur if the Role or RoleBinding does not have sufficient permissions. Ensure that the Role has `list` and `delete` permissions on `pods` in `second-namespace`.
 
 - **Python script not running in the pod**:
