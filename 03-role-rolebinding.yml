@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: second-namespace
+  name: pod-cleanup-role
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list", "delete"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-cleanup-role-binding
+  namespace: second-namespace
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: first-namespace
+roleRef:
+  kind: Role
+  name: pod-cleanup-role
+  apiGroup: rbac.authorization.k8s.io

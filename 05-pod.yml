@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cleanup
+  namespace: first-namespace
+spec:
+  containers:
+  - name: cleanup-container
+    image: python:3.9
+    command: ["/bin/sh", "-c"]
+    args:
+    - pip install kubernetes && python -u /scripts/cleanup.py
+    volumeMounts:
+    - name: script-volume
+      mountPath: /scripts
+  volumes:
+  - name: script-volume
+    configMap:
+      name: cleanup-script-configmap

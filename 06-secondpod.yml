@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata: #dict
+  name: myapp-pod
+  namespace: second-namespace
+  labels: # dict
+    app: myapp
+spec:
+  containers: #list
+    - name: myapp
+      image: stacksimplify/kubenginx:1.0.0
+      ports:
+        - containerPort: 80
+
+
+--- 
+# here we are create a pod that will not create because of wrong image and so that we can check after apply it will delete using that first-namespace pod 
+apiVersion: v1
+kind: Pod
+metadata: #dict
+  name: myapp-pod-error
+  namespace: second-namespace
+  labels: # dict
+    app: myapp
+spec:
+  containers: #list
+    - name: myapp
+      image: stacksimpli/kbenginx:1.0.0
+      ports:
+        - containerPort: 80
